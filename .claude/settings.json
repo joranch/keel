@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew *)",
+      "Bash(npm ci)",
+      "Bash(npm run *)",
+      "Bash(npm --prefix web run *)",
+      "Bash(npx prettier *)",
+      "Bash(npx tsc *)",
+      "Bash(npx vitest *)",
+      "Bash(npx playwright test *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git switch *)",
+      "Bash(git restore *)",
+      "Bash(git stash *)",
+      "Bash(docker compose ps)",
+      "Bash(docker compose logs *)",
+      "WebFetch(domain:developers.google.com)",
+      "WebFetch(domain:kotlinlang.org)",
+      "WebFetch(domain:ktor.io)",
+      "WebFetch(domain:docs.gradle.org)",
+      "WebFetch(domain:www.postgresql.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:react.dev)",
+      "WebFetch(domain:tanstack.com)",
+      "WebFetch(domain:echarts.apache.org)",
+      "WebFetch(domain:owasp.org)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(docker compose up *)",
+      "Bash(docker compose down *)",
+      "Bash(rm *)",
+      "Bash(npm install *)",
+      "Bash(npm i *)",
+      "Edit(./.github/workflows/**)",
+      "Edit(./storage/src/main/resources/db/migration/**)",
+      "Edit(./CLAUDE.md)",
+      "Edit(./.claude/agents/**)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.local)",
+      "Read(./.env.production)",
+      "Read(./secrets/**)",
+      "Read(./**/*.pem)",
+      "Read(./**/*-key.json)",
+      "Read(~/.ssh/**)",
+      "Read(~/.config/gcloud/**)",
+      "Read(~/.aws/**)",
+      "Edit(./.claude/settings.json)",
+      "Edit(./.claude/hooks/**)",
+      "Edit(./.claude/approved-dependencies.txt)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push origin main *)",
+      "Bash(git reset --hard *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(sudo *)",
+      "Bash(npx -y *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/check_new_dependency.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/format_on_edit.sh\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/stop_fast_tests.sh\"",
+            "timeout": 900
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "security-guidance@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "kotlin-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true
+  }
+}

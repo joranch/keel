@@ -1,0 +1,11 @@
+# Replace @joranch with your GitHub username before the first push.
+# These paths need the owner's review (Engineering C7/C9 high-risk list).
+*                                         @joranch
+/changes/                                 @joranch
+/rules/src/main/kotlin/**/guard*/         @joranch
+/storage/src/main/resources/db/migration/ @joranch
+/platform/                                @joranch
+/connector-googleads/**/auth/             @joranch
+/.github/                                 @joranch
+/.claude/                                 @joranch
+/CLAUDE.md                                @joranch
