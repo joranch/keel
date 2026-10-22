@@ -1,4 +1,4 @@
-# Replace @joranch with your GitHub username before the first push.
+# Code owners: @joranch reviews everything; the paths below are the high-risk list.
 # These paths need the owner's review (Engineering C7/C9 high-risk list).
 *                                         @joranch
 /changes/                                 @joranch
