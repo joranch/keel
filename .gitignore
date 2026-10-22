@@ -28,3 +28,30 @@ replay_pid*
 
 .env*
 secrets/
+
+# Keep the Gradle wrapper (excluded by *.jar above)
+!gradle/wrapper/gradle-wrapper.jar
+
+# Build output
+build/
+.gradle/
+web/node_modules/
+node_modules/
+web/dist/
+web/coverage/
+web/playwright-report/
+web/test-results/
+
+# Secrets and keys (also denied to agents in .claude/settings.json)
+!.env.example
+*.pem
+*-key.json
+
+# Local tooling
+.idea/
+*.iml
+.vscode/
+.DS_Store
+.claude/settings.local.json
+__pycache__/
+*.pyc

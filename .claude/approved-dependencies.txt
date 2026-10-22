@@ -1,0 +1,72 @@
+# Dependencies Jøran has approved (Engineering C7). Agents can't edit this file.
+# Before adding a line: the package exists in the official registry, has a real publish
+# history and maintainers, isn't a near-miss of a popular name, and the reason is recorded
+# in the pull request. Formats: maven:group:artifact, maven:group:*, gradle-plugin:id, npm:name, npm:@scope/*
+#
+# Pre-approved from the Build plan and Engineering tab (22 Oct 2026). Review before the first commit.
+
+# Kotlin and build
+gradle-plugin:org.jetbrains.kotlin.jvm
+gradle-plugin:org.jetbrains.kotlin.plugin.serialization
+gradle-plugin:org.jlleitschuh.gradle.ktlint
+gradle-plugin:dev.detekt
+gradle-plugin:io.gitlab.arturbosch.detekt
+gradle-plugin:org.jetbrains.kotlinx.kover
+gradle-plugin:org.flywaydb.flyway
+gradle-plugin:org.cyclonedx.bom
+gradle-plugin:io.ktor.plugin
+maven:org.jetbrains.kotlin:*
+maven:org.jetbrains.kotlinx:kotlinx-serialization-*
+maven:org.jetbrains.kotlinx:kotlinx-coroutines-*
+maven:org.jetbrains.kotlinx:kotlinx-datetime
+
+# Server
+maven:io.ktor:*
+maven:org.jetbrains.exposed:*
+maven:org.flywaydb:*
+maven:org.postgresql:postgresql
+maven:com.zaxxer:HikariCP
+maven:ch.qos.logback:logback-classic
+maven:net.logstash.logback:logstash-logback-encoder
+maven:io.github.oshai:kotlin-logging-jvm
+
+# Google Ads (pinned through the BOM, ADR 0016)
+maven:com.google.api-ads:google-ads
+maven:com.google.api-ads:google-ads-bom
+
+# Tests
+maven:org.junit:*
+maven:org.junit.jupiter:*
+maven:io.kotest:*
+maven:io.mockk:*
+maven:org.testcontainers:*
+maven:com.lemonappdev:konsist
+maven:org.pitest:*
+maven:info.solidsoft.gradle.pitest:*
+gradle-plugin:info.solidsoft.pitest
+maven:io.gatling:*
+gradle-plugin:io.gatling.gradle
+
+# Web
+npm:react
+npm:react-dom
+npm:typescript
+npm:vite
+npm:@vitejs/*
+npm:@tanstack/*
+npm:echarts
+npm:echarts-for-react
+npm:openapi-typescript
+npm:openapi-fetch
+npm:@types/*
+npm:eslint
+npm:@eslint/*
+npm:typescript-eslint
+npm:eslint-plugin-react-hooks
+npm:eslint-plugin-jsx-a11y
+npm:prettier
+npm:vitest
+npm:@testing-library/*
+npm:jsdom
+npm:@playwright/test
+npm:@axe-core/playwright
