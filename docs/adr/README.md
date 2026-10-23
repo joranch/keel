@@ -25,4 +25,4 @@ Decisions and their reasons. Write new ones with the `adr` skill (`.claude/skill
 | 0019 | [Development data: a design partner's account plus synthetic accounts](0019-development-data-a-design-partner-s-account-plus-synthetic-a.md) | Accepted |
 | 0020 | [AI-assisted development with Claude Code agents and official plugins](0020-ai-assisted-development-with-claude-code-agents-and-official.md) | Accepted |
 | 0021 | [Security tooling for a private repository](0021-security-tooling-for-a-private-repository.md) | Accepted |
-| 0022 | [Platform-neutral model with capabilities; Meta as the second platform](0022-platform-neutral-model-with-capabilities-meta-second.md) | Proposed |
+| 0022 | [Platform-neutral model with capabilities; Meta as the second platform](0022-platform-neutral-model-with-capabilities-meta-second.md) | Accepted |

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alert: conversion tracking stopped</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="Main.dc.html" active="{{yes}}" count="{{two}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="Approvals.dc.html" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="Main.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="B2B leads" range="Last 28 days" compare="vs previous 28 days" freshness="Synced 06:04" alerts="{{two}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size: 13px; color: var(--ink-subtle);"><a href="Main.dc.html">Overview</a> › Alerts › Conversion tracking stopped</nav>
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="align-self: flex-start; font-size: 12px; font-weight: 600; color: var(--bad); background: var(--bad-subtle); border-radius: var(--radius-full); padding: 2px 10px;">Critical · open</span>
+          <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">Conversion tracking stopped on B2B leads</h1>
+          <p style="margin: 0; color: var(--ink-muted);">Opened 19 Oct 06:00 · conversion action “Contact form submitted”</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <x-import component-from-global-scope="Keel.Button" variant="ghost">Snooze 24 h</x-import>
+          <x-import component-from-global-scope="Keel.Button" variant="secondary">Acknowledge</x-import>
+          <a href="Main.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500;">Mark resolved</a>
+        </div>
+      </header>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+          <section aria-labelledby="what-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <h2 id="what-h" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">What happened</h2>
+            <p style="margin: 0;">No conversions recorded since <strong style="font-weight: 600;">18 Oct 04:00</strong>. Before that the account averaged 1.3 a day, so three days with none has about a 2% chance of being normal variation.</p>
+            <svg viewBox="0 0 720 190" role="img" aria-label="Daily conversions for the last 28 days: between 0 and 3 a day until 18 October, then none for three days" style="width: 100%; height: auto; font-family: var(--font-sans);">
+              <rect x="{{bars.gapX}}" y="10" width="{{bars.gapW}}" height="140" style="fill: var(--bad-subtle)"></rect>
+              <text x="712" y="24" text-anchor="end" style="font-size: 11px; font-weight: 500; fill: var(--bad);">None since 18 Oct</text>
+              <line x1="36" x2="712" y1="150" y2="150" style="stroke: var(--border-strong); stroke-width: 1"></line>
+              <line x1="36" x2="712" y1="110" y2="110" style="stroke: var(--chart-grid); stroke-width: 1"></line>
+              <line x1="36" x2="712" y1="70" y2="70" style="stroke: var(--chart-grid); stroke-width: 1"></line>
+              <line x1="36" x2="712" y1="30" y2="30" style="stroke: var(--chart-grid); stroke-width: 1"></line>
+              <text x="28" y="154" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">0</text>
+              <text x="28" y="114" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">1</text>
+              <text x="28" y="74" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">2</text>
+              <text x="28" y="34" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">3</text>
+              <sc-for list="{{bars.items}}" as="b" hint-placeholder-count="28">
+                <rect x="{{b.x}}" y="{{b.y}}" width="16" height="{{b.h}}" rx="2" style="fill: var(--chart-1)"></rect>
+              </sc-for>
+              <sc-for list="{{bars.ticks}}" as="t" hint-placeholder-count="4">
+                <text x="{{t.x}}" y="174" text-anchor="middle" style="font-size: 11px; fill: var(--ink-subtle);">{{t.label}}</text>
+              </sc-for>
+            </svg>
+          </section>
+
+          <section aria-labelledby="fix-h" style="background: var(--surface); border: 2px solid var(--accent); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="fix-h" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">Recommended: keep Smart Bidding from learning from these days</h2>
+            <p style="margin: 0;">Two campaigns bid automatically and are treating the missing conversions as real. A data exclusion tells Google to ignore 18 Oct 04:00 until tracking is fixed. Keep it short: frequent or long exclusions weaken Smart Bidding.</p>
+            <sc-if value="{{exclNotProposed}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                <button type="button" onClick="{{proposeExcl}}" style="height: 36px; padding: 0 16px; border: 0; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); font: 500 14px/20px var(--font-sans); cursor: pointer;">Propose data exclusion</button>
+                <span style="font-size: 13px; color: var(--ink-muted);">B2B – Search NO and B2B – Performance Max · from 18 Oct 04:00 · end date set when you resolve the alert</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{exclProposed}}" hint-placeholder-val="{{ false }}">
+              <div role="status" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 10px 14px; border-radius: var(--radius-md); background: var(--warning-subtle);">
+                <span style="font-weight: 500;">Data exclusion proposed for 2 campaigns.</span>
+                <a href="Approvals.dc.html">Approve it in Automate</a>
+              </div>
+            </sc-if>
+          </section>
+
+          <section aria-labelledby="check-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px;">
+            <h2 id="check-h" style="margin: 0 0 12px; font-size: 18px; line-height: 26px; font-weight: 600;">What to check, most likely first</h2>
+            <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+              <li>Submit the contact form yourself and confirm the Google tag fires on the thank-you page, for example with Tag Assistant.</li>
+              <li>Check whether the website or the tag manager container changed on 17 or 18 Oct.</li>
+              <li>In Google Ads, open Goals › Conversions and check the status of “Contact form submitted”. <a href="https://ads.google.com/" rel="noopener">Open Google Ads</a></li>
+              <li>If conversions come from a CRM import, check when the last upload ran.</li>
+            </ol>
+          </section>
+
+          <section aria-labelledby="aff-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+            <h2 id="aff-h" style="margin: 0; padding: 16px 20px; font-size: 18px; line-height: 26px; font-weight: 600;">Spend since tracking stopped</h2>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;">
+                <thead>
+                  <tr style="background: var(--surface-sunken); color: var(--ink-muted); font-size: 12px; text-align: left;">
+                    <th scope="col" style="padding: 8px 20px; font-weight: 500;">Campaign</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500;">Bidding</th>
+                    <th scope="col" style="padding: 8px 20px; font-weight: 500; text-align: right;">Cost since 18 Oct</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px;"><a href="Explorer.dc.html">B2B – Search NO</a></td><td style="padding: 10px 12px; color: var(--ink-muted);">Target CPA</td><td style="padding: 10px 20px; text-align: right;">1 120 NOK</td></tr>
+                  <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px;"><a href="Explorer.dc.html">B2B – Performance Max</a></td><td style="padding: 10px 12px; color: var(--ink-muted);">Maximize conversions</td><td style="padding: 10px 20px; text-align: right;">640 NOK</td></tr>
+                  <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px;"><a href="Explorer.dc.html">B2B – Brand</a></td><td style="padding: 10px 12px; color: var(--ink-muted);">Manual CPC</td><td style="padding: 10px 20px; text-align: right;">210 NOK</td></tr>
+                  <tr style="border-top: 1px solid var(--border); font-weight: 600;"><td style="padding: 10px 20px;" colspan="2">Total</td><td style="padding: 10px 20px; text-align: right;">1 970 NOK</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin: 0; padding: 12px 20px 16px; font-size: 13px; color: var(--ink-muted);">Smart Bidding campaigns learn from missing conversions too. Once tracking is fixed, expect a few days of unstable bids.</p>
+          </section>
+        </div>
+
+        <aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="hold-h" style="background: var(--warning-subtle); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="hold-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">3 rules on hold for this account</h2>
+            <p style="margin: 0; font-size: 13px; color: var(--ink-muted);">They would read the missing conversions as poor performance. They resume when you resolve this alert.</p>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px;">
+              <li style="display: flex; justify-content: space-between; gap: 8px;"><span>Zero-conversion keywords</span><x-import component-from-global-scope="Keel.StatusPill" status="paused">On hold</x-import></li>
+              <li style="display: flex; justify-content: space-between; gap: 8px;"><span>Nudge target CPA</span><x-import component-from-global-scope="Keel.StatusPill" status="paused">On hold</x-import></li>
+              <li style="display: flex; justify-content: space-between; gap: 8px;"><span>Non-converting search terms</span><x-import component-from-global-scope="Keel.StatusPill" status="paused">On hold</x-import></li>
+            </ul>
+          </section>
+          <section aria-labelledby="tl-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px;">
+            <h2 id="tl-h" style="margin: 0 0 12px; font-size: 15px; line-height: 22px; font-weight: 600;">Timeline</h2>
+            <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+              <li><span style="display: block; color: var(--ink-subtle); font-variant-numeric: tabular-nums;">18 Oct 04:00</span>Last conversion recorded</li>
+              <li><span style="display: block; color: var(--ink-subtle); font-variant-numeric: tabular-nums;">19 Oct 06:00</span>Alert opened after a full day with none; rules put on hold; push sent</li>
+              <li><span style="display: block; color: var(--ink-subtle); font-variant-numeric: tabular-nums;">21 Oct 06:04</span>Still none after the latest sync</li>
+            </ol>
+          </section>
+          <section aria-labelledby="why-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; font-size: 13px; color: var(--ink-muted);">
+            <h2 id="why-h" style="margin: 0 0 6px; font-size: 15px; line-height: 22px; font-weight: 600; color: var(--ink);">Why Keel raised this</h2>
+            Rule: conversion tracking silent. Yesterday had 0 conversions while the 28-day average is 1 or more a day. <a href="RuleBuilder.dc.html">View rule</a>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1040}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { excl: false };
+  }
+  renderVals() {
+    var self = this;
+    var v = [1,2,1,0,2,1,1,2,1,1,0,2,1,1,2,1,1,0,1,2,1,2,2,3,1,0,0,0];
+    var X = function (i) { return 40 + i * 24.1; };
+    var labels = { 0: '24 Sep', 7: '1 Oct', 17: '11 Oct', 27: '21 Oct' };
+    return {
+      yes: true, two: 2, three: 3,
+      exclProposed: this.state.excl, exclNotProposed: !this.state.excl,
+      proposeExcl: function () { self.setState({ excl: true }); },
+      bars: {
+        items: v.map(function (n, i) { var h = n * 40; return { x: X(i).toFixed(1), y: (150 - h).toFixed(1), h: h }; }),
+        ticks: [0, 7, 17, 27].map(function (i) { return { x: (X(i) + 8).toFixed(1), label: labels[i] }; }),
+        gapX: (X(25) - 4).toFixed(1), gapW: (X(27) - X(25) + 24).toFixed(1), gapLabelX: ((X(25) + X(27)) / 2 + 8).toFixed(1)
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

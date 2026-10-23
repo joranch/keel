@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Apply a rule to other accounts</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="OverviewPlatforms.dc.html" count="{{three}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="RuleTemplate.dc.html" active="{{yes}}" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="OverviewPlatforms.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="All accounts (4)" range="Last 30 days" compare="vs previous 30 days" freshness="Synced 06:04" alerts="{{three}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Breadcrumb" style="font-size: 13px; color: var(--ink-subtle);"><a href="Approvals.dc.html">Automate</a> › <a href="RuleBuilder.dc.html">Rules</a> › Zero-conversion keywords › Apply to other accounts</nav>
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+        <div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">Apply a rule to other accounts</h1>
+            <x-import component-from-global-scope="Keel.StatusPill" status="preview">Phase 3</x-import>
+          </div>
+          <p style="margin: 4px 0 0; color: var(--ink-muted);">Each account gets its own copy of the rule. Copies start in shadow mode: they log what they would change, and change nothing until you switch them on.</p>
+        </div>
+      </header>
+
+      <sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 14px 20px; border-radius: var(--radius-lg); background: var(--good-subtle); border: 1px solid var(--border);">
+          <span style="font-weight: 600; color: var(--good);">{{doneLabel}}</span>
+          <span style="flex-grow: 1;">They run with tonight's sync and appear in the decision log from tomorrow.</span>
+          <a href="Approvals.dc.html" style="font-weight: 500;">Go to rules</a>
+        </div>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 3 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+          <section aria-labelledby="t-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px;">
+              <h2 id="t-h" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">Where it can run</h2>
+              <p style="margin: 0; font-size: 13px; color: var(--ink-muted);">Keel checks that each account has what the rule uses: keywords, conversions and a CPA goal.</p>
+            </div>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; min-width: 640px;">
+                <thead>
+                  <tr style="background: var(--surface-sunken); color: var(--ink-muted); font-size: 12px; text-align: left;">
+                    <th scope="col" style="padding: 8px 12px 8px 20px; width: 28px;"><span class="keel-sr">Select</span></th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500;">Account</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500;">Platform</th>
+                    <th scope="col" style="padding: 8px 20px 8px 12px; font-weight: 500;">Check</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{targets}}" as="t" hint-placeholder-count="4">
+                    <tr style="border-top: 1px solid var(--border); background: {{t.bg}};">
+                      <td style="padding: 10px 12px 10px 20px;"><input type="checkbox" class="keel-check" checked="{{t.checked}}" disabled="{{t.disabled}}" onChange="{{t.toggle}}" aria-label="{{t.selectLabel}}"></td>
+                      <td style="padding: 10px 12px;"><span style="font-weight: 500;">{{t.name}}</span></td>
+                      <td style="padding: 10px 12px; color: var(--ink-muted);">{{t.platform}}</td>
+                      <td style="padding: 10px 20px 10px 12px;"><span style="display: block; font-weight: 500; color: {{t.checkColor}};">{{t.check}}</span><span style="display: block; font-size: 13px; color: var(--ink-muted);">{{t.detail}}</span></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <fieldset style="margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+            <legend style="padding: 0 4px; font-size: 15px; font-weight: 600;">Which goal the copies use</legend>
+            <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer;"><input type="radio" name="goal" defaultChecked="{{yes}}" style="margin-top: 3px;"><span><span style="display: block; font-weight: 500;">Each account's own CPA goal</span><span style="font-size: 13px; color: var(--ink-muted);">Outlet 250 NOK, B2B leads 400 NOK (set in Goals)</span></span></label>
+            <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer;"><input type="radio" name="goal" style="margin-top: 3px;"><span><span style="display: block; font-weight: 500;">The same 250 NOK as Webshop</span><span style="font-size: 13px; color: var(--ink-muted);">Only if the accounts sell the same thing at similar margins</span></span></label>
+          </fieldset>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: flex-end;">
+            <span style="font-size: 13px; color: var(--ink-subtle);">{{countLabel}}</span>
+            <a href="RuleBuilder.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); color: var(--ink); text-decoration: none; font-weight: 500;">Cancel</a>
+            <x-import component-from-global-scope="Keel.Button" variant="primary" disabled="{{none}}" on-click="{{apply}}">{{applyLabel}}</x-import>
+          </div>
+        </div>
+
+        <aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="r-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="r-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">The rule</h2>
+            <dl style="margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 12px; font-size: 13px;">
+              <dt style="color: var(--ink-muted);">Name</dt><dd style="margin: 0;"><a href="RuleBuilder.dc.html">Zero-conversion keywords</a>, version 3</dd>
+              <dt style="color: var(--ink-muted);">From</dt><dd style="margin: 0;">Webshop · Google Ads</dd>
+              <dt style="color: var(--ink-muted);">Does</dt><dd style="margin: 0;">Pauses keywords with no conversions where 3 or more were expected</dd>
+              <dt style="color: var(--ink-muted);">Uses</dt><dd style="margin: 0;">Keywords, conversions, CPA goal</dd>
+              <dt style="color: var(--ink-muted);">Precision</dt><dd style="margin: 0;">92% of its proposals approved in Webshop</dd>
+            </dl>
+          </section>
+          <section style="background: var(--surface-sunken); border-radius: var(--radius-lg); padding: 16px 20px; font-size: 13px; color: var(--ink-muted);">
+            Copies are separate rules. Editing one later doesn't change the others or the original.
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: { outlet: true, b2b: true }, done: false, made: 0 };
+  }
+  renderVals() {
+    var self = this;
+    var data = [
+      { id: 'outlet', name: 'Outlet', platform: 'Google Ads', ok: true, check: 'Ready', checkColor: 'var(--good)', detail: 'Has keywords, conversions and a CPA goal' },
+      { id: 'b2b', name: 'B2B leads', platform: 'Google Ads', ok: true, check: 'Ready, on hold for now', checkColor: 'var(--warning)', detail: 'Tracking stopped on 18 Oct; the copy waits until conversions are recorded again' },
+      { id: 'meta', name: 'Webshop – Meta', platform: 'Meta', ok: false, check: "Can't run here", checkColor: 'var(--bad)', detail: 'Meta has no keywords, so this rule has nothing to act on' },
+      { id: 'old', name: 'Old brand test', platform: 'Google Ads', ok: false, check: 'Not synced', checkColor: 'var(--ink-subtle)', detail: 'Include the account in Settings first' }
+    ];
+    var picked = this.state.picked;
+    var n = data.filter(function (d) { return d.ok && picked[d.id]; }).length;
+    return {
+      yes: true, three: 3,
+      done: this.state.done,
+      doneLabel: 'Created ' + this.state.made + (this.state.made === 1 ? ' copy' : ' copies') + ' in shadow mode',
+      none: n === 0,
+      countLabel: n + ' of 2 possible accounts selected',
+      applyLabel: n === 1 ? 'Create 1 copy' : 'Create ' + n + ' copies',
+      apply: function () { self.setState({ done: true, made: n }); },
+      targets: data.map(function (d) {
+        var on = d.ok && !!picked[d.id];
+        return Object.assign({}, d, {
+          checked: on, disabled: !d.ok,
+          bg: on ? 'var(--accent-subtle)' : 'var(--surface)',
+          selectLabel: 'Apply to ' + d.name,
+          toggle: function () { var next = Object.assign({}, self.state.picked); next[d.id] = !next[d.id]; self.setState({ picked: next }); }
+        });
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

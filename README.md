@@ -6,5 +6,6 @@ A self-hosted, SaaS-ready PPC optimizer for Google Ads (Search, Shopping, Perfor
 - Architecture decisions: [docs/adr](docs/adr/README.md)
 - Claude Code setup on a new machine: [docs/setup.md](docs/setup.md)
 - Skills and plugins we reuse: [docs/skills.md](docs/skills.md)
+- Wireframes: [docs/design/wireframes](docs/design/wireframes/README.md)
 
 Private. Spec, build plan and backlog live in the Keel doc and backlog board.

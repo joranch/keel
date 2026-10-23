@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Overview</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="Main.dc.html" active="{{yes}}" count="{{two}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="Approvals.dc.html" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="All accounts (3)" range="Last 7 days" compare="vs previous 7 days" freshness="Synced 06:04" alerts="{{two}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+        <div>
+          <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">Overview</h1>
+          <p style="margin: 4px 0 0; color: var(--ink-muted);">What needs attention across your accounts, then where the money went.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+          <div role="group" aria-label="Traffic" style="display: inline-flex; padding: 3px; border-radius: var(--radius-md); background: var(--surface-sunken); gap: 2px;">
+            <button type="button" aria-pressed="true" style="height: 28px; padding: 0 12px; border: 0; border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font: 500 13px/18px var(--font-sans);">All</button>
+            <button type="button" aria-pressed="false" style="height: 28px; padding: 0 12px; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink); font: 500 13px/18px var(--font-sans);">Non-brand</button>
+            <button type="button" aria-pressed="false" style="height: 28px; padding: 0 12px; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink); font: 500 13px/18px var(--font-sans);">Brand</button>
+          </div>
+          <span style="color: var(--ink-subtle); font-size: 13px;">Tue 15 Oct – Mon 21 Oct · NOK</span>
+        </div>
+      </header>
+
+      <section aria-label="Needs attention" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+        <a href="AlertDetail.dc.html" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: var(--radius-lg); background: var(--bad-subtle); color: var(--ink); text-decoration: none; border: 1px solid var(--border);">
+          <span style="font-weight: 600; color: var(--bad); font-size: 12px; padding-top: 1px;">CRITICAL</span>
+          <span><span style="display: block; font-weight: 500;">Conversion tracking stopped on B2B leads</span><span style="display: block; color: var(--ink-muted); font-size: 13px;">No conversions since 18 Oct 04:00 · rules on hold</span></span>
+        </a>
+        <a href="Approvals.dc.html" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: var(--radius-lg); background: var(--warning-subtle); color: var(--ink); text-decoration: none; border: 1px solid var(--border);">
+          <span style="font-weight: 600; color: var(--warning); font-size: 12px; padding-top: 1px;">3 WAITING</span>
+          <span><span style="display: block; font-weight: 500;">3 change sets need your approval</span><span style="display: block; color: var(--ink-muted); font-size: 13px;">17 changes · the oldest expires in 18 h</span></span>
+        </a>
+        <a href="SearchTerms.dc.html" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: var(--radius-lg); background: var(--surface); color: var(--ink); text-decoration: none; border: 1px solid var(--border);">
+          <span style="font-weight: 600; color: var(--info); font-size: 12px; padding-top: 1px;">WASTE</span>
+          <span><span style="display: block; font-weight: 500;">23 search terms spent 1 840 NOK with no conversions</span><span style="display: block; color: var(--ink-muted); font-size: 13px;">Last 30 days · Webshop and Outlet</span></span>
+        </a>
+      </section>
+
+      <div role="group" aria-label="Signal and data" style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 13px; color: var(--ink-muted);">
+        <span>Conversion health: Webshop <strong style="color: var(--good); font-weight: 500;">healthy</strong> · Outlet <strong style="color: var(--good); font-weight: 500;">healthy</strong> · B2B leads <a href="AlertDetail.dc.html" style="color: var(--bad); font-weight: 500;">broken</a></span>
+        <span>Goals: CPA 250 NOK (Webshop, Outlet) · CPA 400 NOK (B2B leads)</span>
+        <span>9 suggestions held back for lack of data this week</span>
+      </div>
+
+      <section aria-label="Key metrics" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <a href="Explorer.dc.html" style="text-decoration: none; color: inherit; display: block;"><x-import component-from-global-scope="Keel.KpiCard" label="Cost" value="24 318 NOK" delta="{{kpi.costDelta}}" polarity="neutral" compare="vs previous 7 days" trend="{{kpi.cost}}"></x-import></a>
+        <a href="Explorer.dc.html" style="text-decoration: none; color: inherit; display: block;"><x-import component-from-global-scope="Keel.KpiCard" label="Conversions" value="142" delta="{{kpi.convDelta}}" polarity="higher-better" compare="vs previous 7 days" trend="{{kpi.conv}}" maturing="{{yes}}"></x-import></a>
+        <a href="Explorer.dc.html" style="text-decoration: none; color: inherit; display: block;"><x-import component-from-global-scope="Keel.KpiCard" label="CPA" value="171 NOK" delta="{{kpi.cpaDelta}}" polarity="lower-better" compare="vs previous 7 days" trend="{{kpi.cpa}}" maturing="{{yes}}"></x-import></a>
+        <a href="Explorer.dc.html" style="text-decoration: none; color: inherit; display: block;"><x-import component-from-global-scope="Keel.KpiCard" label="ROAS" value="3.68×" delta="{{kpi.roasDelta}}" polarity="higher-better" compare="vs previous 7 days" trend="{{kpi.roas}}" maturing="{{yes}}"></x-import></a>
+        <a href="Explorer.dc.html" style="text-decoration: none; color: inherit; display: block;"><x-import component-from-global-scope="Keel.KpiCard" label="CTR" value="3.42%" delta="{{kpi.ctrDelta}}" polarity="higher-better" compare="vs previous 7 days" trend="{{kpi.ctr}}"></x-import></a>
+      </section>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+          <section aria-labelledby="trend-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline;">
+              <h2 id="trend-h" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">Conversions per day, last 30 days</h2>
+              <span style="font-size: 13px; color: var(--ink-subtle);">Dashed: previous 30 days · ◆ change from the log</span>
+            </div>
+            <svg viewBox="0 0 720 220" role="img" aria-label="Conversions per day for the last 30 days, flat around 22 until a decline over the last week, which is still maturing" style="width: 100%; height: auto; margin-top: 12px; font-family: var(--font-sans);">
+              <rect x="{{chart.bandX}}" y="20" width="{{chart.bandW}}" height="160" style="fill: var(--warning-subtle)"></rect>
+              <text x="{{chart.bandLabelX}}" y="34" text-anchor="middle" style="font-size: 11px; fill: var(--warning); font-weight: 500;">Maturing</text>
+              <line x1="48" x2="700" y1="180" y2="180" style="stroke: var(--border-strong); stroke-width: 1"></line>
+              <line x1="48" x2="700" y1="126.7" y2="126.7" style="stroke: var(--chart-grid); stroke-width: 1"></line>
+              <line x1="48" x2="700" y1="73.3" y2="73.3" style="stroke: var(--chart-grid); stroke-width: 1"></line>
+              <line x1="48" x2="700" y1="20" y2="20" style="stroke: var(--chart-grid); stroke-width: 1"></line>
+              <text x="40" y="184" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">0</text>
+              <text x="40" y="130.7" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">10</text>
+              <text x="40" y="77.3" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">20</text>
+              <text x="40" y="24" text-anchor="end" style="font-size: 11px; fill: var(--ink-subtle);">30</text>
+              <path d="{{chart.cmpPath}}" style="fill: none; stroke: var(--chart-compare); stroke-width: 1.5; stroke-dasharray: 4 4"></path>
+              <path d="{{chart.curPath}}" style="fill: none; stroke: var(--chart-1); stroke-width: 2"></path>
+              <sc-for list="{{chart.markers}}" as="m" hint-placeholder-count="2">
+                <g>
+                  <title>{{m.label}}</title>
+                  <path d="{{m.d}}" style="fill: var(--ink-subtle)"></path>
+                </g>
+              </sc-for>
+              <sc-for list="{{chart.ticks}}" as="t" hint-placeholder-count="4">
+                <text x="{{t.x}}" y="208" text-anchor="middle" style="font-size: 11px; fill: var(--ink-subtle);">{{t.label}}</text>
+              </sc-for>
+            </svg>
+            <p style="margin: 8px 0 0; font-size: 13px; color: var(--ink-muted);">The last 7 days drop from 23 to 17 a day. Part of it is conversion lag; B2B leads stopped recording conversions on 18 Oct. <a href="AlertDetail.dc.html">See the alert</a></p>
+          </section>
+
+          <section aria-labelledby="acc-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+            <h2 id="acc-h" style="margin: 0; padding: 16px 20px; font-size: 18px; line-height: 26px; font-weight: 600;">Accounts</h2>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;">
+                <thead>
+                  <tr style="background: var(--surface-sunken); color: var(--ink-muted); font-size: 12px; text-align: left;">
+                    <th scope="col" style="padding: 8px 20px; font-weight: 500;">Account</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500; text-align: right;">Cost</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500; text-align: right;">Conv.</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500; text-align: right;">CPA</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500;">CPA change</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500; text-align: right;">ROAS</th>
+                    <th scope="col" style="padding: 8px 20px; font-weight: 500;">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-top: 1px solid var(--border);">
+                    <td style="padding: 10px 20px;"><a href="Explorer.dc.html" style="font-weight: 500;">Webshop</a></td>
+                    <td style="padding: 10px 12px; text-align: right;">15 120</td>
+                    <td style="padding: 10px 12px; text-align: right;">98</td>
+                    <td style="padding: 10px 12px; text-align: right;">154</td>
+                    <td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.DeltaBadge" value="{{acc.webshop}}" polarity="lower-better"></x-import></td>
+                    <td style="padding: 10px 12px; text-align: right;">4.60×</td>
+                    <td style="padding: 10px 20px; color: var(--ink-muted);">On pace</td>
+                  </tr>
+                  <tr style="border-top: 1px solid var(--border);">
+                    <td style="padding: 10px 20px;"><a href="Explorer.dc.html" style="font-weight: 500;">Outlet</a></td>
+                    <td style="padding: 10px 12px; text-align: right;">6 410</td>
+                    <td style="padding: 10px 12px; text-align: right;">36</td>
+                    <td style="padding: 10px 12px; text-align: right;">178</td>
+                    <td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.DeltaBadge" value="{{acc.outlet}}" polarity="lower-better"></x-import></td>
+                    <td style="padding: 10px 12px; text-align: right;">3.10×</td>
+                    <td style="padding: 10px 20px; color: var(--warning); font-weight: 500;">Budget 18% over</td>
+                  </tr>
+                  <tr style="border-top: 1px solid var(--border);">
+                    <td style="padding: 10px 20px;"><a href="Explorer.dc.html" style="font-weight: 500;">B2B leads</a></td>
+                    <td style="padding: 10px 12px; text-align: right;">2 788</td>
+                    <td style="padding: 10px 12px; text-align: right;">8</td>
+                    <td style="padding: 10px 12px; text-align: right;">349</td>
+                    <td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.DeltaBadge" value="{{acc.b2b}}" polarity="lower-better"></x-import></td>
+                    <td style="padding: 10px 12px; text-align: right; color: var(--ink-subtle);">—</td>
+                    <td style="padding: 10px 20px; color: var(--bad); font-weight: 500;">Tracking stopped</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <h2 id="pacing" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">October budgets</h2>
+          <x-import component-from-global-scope="Keel.PacingBar" label="Webshop · October" spent="{{pace.w.spent}}" projected="{{pace.w.projected}}" budget="{{pace.w.budget}}" ideal-daily="{{pace.w.ideal}}"></x-import>
+          <x-import component-from-global-scope="Keel.PacingBar" label="Outlet · October" spent="{{pace.o.spent}}" projected="{{pace.o.projected}}" budget="{{pace.o.budget}}" ideal-daily="{{pace.o.ideal}}"></x-import>
+          <h2 style="margin: 8px 0 0; font-size: 18px; line-height: 26px; font-weight: 600;">Open alerts</h2>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+            <a href="AlertDetail.dc.html" style="display: block; text-decoration: none; color: inherit;"><x-import component-from-global-scope="Keel.AlertItem" severity="critical" title="Conversion tracking stopped" meta="B2B leads · since 18 Oct 04:00"></x-import></a>
+            <a href="#pacing" style="display: block; text-decoration: none; color: inherit; border-top: 1px solid var(--border);"><x-import component-from-global-scope="Keel.AlertItem" severity="warning" title="October budget projected 18% over" meta="Outlet · 29 400 of 25 000 NOK"></x-import></a>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var cur = [21,22,23,22,24,22,21,23,22,24,23,22,21,23,22,23,23,23,22,23,23,23,23,23,22,21,20,20,19,17];
+    var cmp = [22,21,22,23,21,22,23,22,21,22,23,22,22,21,23,22,22,21,22,23,22,22,21,22,23,22,22,21,22,23];
+    var X = function (i) { return 48 + i * 652 / 29; };
+    var Y = function (v) { return 180 - v / 30 * 160; };
+    var path = function (a) { return 'M' + a.map(function (v, i) { return X(i).toFixed(1) + ' ' + Y(v).toFixed(1); }).join(' L'); };
+    var marker = function (i, label) { var x = X(i); return { label: label, d: 'M' + x.toFixed(1) + ' 174 l6 6 l-6 6 l-6 -6 z' }; };
+    return {
+      yes: true, two: 2, three: 3,
+      kpi: {
+        cost: [3310,3390,3460,3480,3520,3560,3598], costDelta: 6.2,
+        conv: [23,22,21,20,20,19,17], convDelta: -11.4,
+        cpa: [144,154,165,174,176,187,212], cpaDelta: 19.9,
+        roas: [3.9,3.8,3.8,3.7,3.6,3.6,3.4], roasDelta: -8.0,
+        ctr: [3.3,3.4,3.4,3.5,3.4,3.4,3.5], ctrDelta: 2.1
+      },
+      acc: { webshop: 4.1, outlet: 12.6, b2b: 61.0 },
+      pace: {
+        w: { spent: 41200, projected: 59100, budget: 60000, ideal: 1880 },
+        o: { spent: 18900, projected: 29400, budget: 25000, ideal: 610 }
+      },
+      chart: {
+        curPath: path(cur), cmpPath: path(cmp),
+        bandX: (X(23) - 11).toFixed(1), bandW: (X(29) - X(23) + 22).toFixed(1), bandLabelX: ((X(23) + X(29)) / 2).toFixed(1),
+        markers: [marker(8, 'Webshop daily budget +15% (rule: fund budget-limited winners)'), marker(19, '4 keywords paused (rule: zero-conversion keywords)')],
+        ticks: [{ x: X(0).toFixed(1), label: '22 Sep' }, { x: X(9).toFixed(1), label: '1 Oct' }, { x: X(19).toFixed(1), label: '11 Oct' }, { x: X(29).toFixed(1), label: '21 Oct' }]
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

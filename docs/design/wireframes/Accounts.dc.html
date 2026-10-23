@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Accounts and connections</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="Main.dc.html" count="{{two}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="Approvals.dc.html" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="Main.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html" active="{{yes}}">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="All accounts (3)" range="Last 7 days" compare="vs previous 7 days" freshness="Synced 06:04" alerts="{{two}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+      <nav aria-label="Settings" style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 2px;">
+        <a href="Accounts.dc.html" aria-current="page" style="padding: 8px 12px; border-radius: var(--radius-md); background: var(--accent-subtle); color: var(--accent-ink); font-weight: 500; text-decoration: none;">Accounts and connections</a>
+        <a href="#" style="padding: 8px 12px; border-radius: var(--radius-md); color: var(--ink-muted); text-decoration: none;">Notifications</a>
+        <a href="#" style="padding: 8px 12px; border-radius: var(--radius-md); color: var(--ink-muted); text-decoration: none;">Thresholds</a>
+        <a href="#" style="padding: 8px 12px; border-radius: var(--radius-md); color: var(--ink-muted); text-decoration: none;">Automation safety</a>
+        <a href="#" style="padding: 8px 12px; border-radius: var(--radius-md); color: var(--ink-muted); text-decoration: none;">Data and export</a>
+      </nav>
+      <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+        <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+          <div>
+            <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">Accounts and connections</h1>
+            <p style="margin: 4px 0 0; color: var(--ink-muted);">Which ad accounts Keel reads and changes, and whether the data is fresh.</p>
+          </div>
+          <a href="#" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500;">Link a Google Ads account</a>
+        </header>
+
+        <section aria-labelledby="g-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+          <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start; padding: 16px 20px; border-bottom: 1px solid var(--border);">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <h2 id="g-h" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">Google Ads</h2>
+                <x-import component-from-global-scope="Keel.StatusPill" status="enabled">Connected</x-import>
+              </div>
+              <span style="font-size: 13px; color: var(--ink-muted);">Through manager account 123-456-7890 · linked 12 Oct · your own Cloud project, Explorer access</span>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <x-import component-from-global-scope="Keel.Button" size="sm" variant="secondary">Check connection</x-import>
+              <x-import component-from-global-scope="Keel.Button" size="sm" variant="ghost">Unlink</x-import>
+            </div>
+          </div>
+          <div style="padding: 14px 20px; display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid var(--border);">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--ink-muted);">Google API operations today</span><span style="font-variant-numeric: tabular-nums;"><strong style="font-weight: 600;">640</strong> of 2 880</span></div>
+            <div role="img" aria-label="640 of 2 880 operations used, 22%" style="height: 8px; border-radius: var(--radius-full); background: var(--surface-sunken); overflow: hidden;"><div style="width: 22%; height: 100%; background: var(--accent);"></div></div>
+          </div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 720px;">
+              <thead>
+                <tr style="background: var(--surface-sunken); color: var(--ink-muted); font-size: 12px; text-align: left;">
+                  <th scope="col" style="padding: 8px 20px; font-weight: 500;">Included</th>
+                  <th scope="col" style="padding: 8px 12px; font-weight: 500;">Account</th>
+                  <th scope="col" style="padding: 8px 12px; font-weight: 500;">Currency, time zone</th>
+                  <th scope="col" style="padding: 8px 12px; font-weight: 500;">Last sync</th>
+                  <th scope="col" style="padding: 8px 12px; font-weight: 500;">History</th>
+                  <th scope="col" style="padding: 8px 20px 8px 12px; font-weight: 500;">Data check</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-top: 1px solid var(--border);">
+                  <td style="padding: 10px 20px;"><input type="checkbox" class="keel-check" defaultChecked="{{yes}}" aria-label="Include Webshop"></td>
+                  <td style="padding: 10px 12px;"><span style="font-weight: 500;">Webshop</span><span style="display: block; font-size: 12px; color: var(--ink-subtle);">234-567-8901</span></td>
+                  <td style="padding: 10px 12px; color: var(--ink-muted);">NOK · Europe/Oslo</td>
+                  <td style="padding: 10px 12px;">Today 06:04</td>
+                  <td style="padding: 10px 12px; color: var(--ink-muted);">13 months</td>
+                  <td style="padding: 10px 20px 10px 12px; color: var(--good); font-weight: 500;">Matches Google, 0.1% off</td>
+                </tr>
+                <tr style="border-top: 1px solid var(--border);">
+                  <td style="padding: 10px 20px;"><input type="checkbox" class="keel-check" defaultChecked="{{yes}}" aria-label="Include Outlet"></td>
+                  <td style="padding: 10px 12px;"><span style="font-weight: 500;">Outlet</span><span style="display: block; font-size: 12px; color: var(--ink-subtle);">345-678-9012</span></td>
+                  <td style="padding: 10px 12px; color: var(--ink-muted);">NOK · Europe/Oslo</td>
+                  <td style="padding: 10px 12px;">Today 06:04</td>
+                  <td style="padding: 10px 12px; color: var(--ink-muted);">13 months</td>
+                  <td style="padding: 10px 20px 10px 12px; color: var(--good); font-weight: 500;">Matches Google, 0.2% off</td>
+                </tr>
+                <tr style="border-top: 1px solid var(--border);">
+                  <td style="padding: 10px 20px;"><input type="checkbox" class="keel-check" defaultChecked="{{yes}}" aria-label="Include B2B leads"></td>
+                  <td style="padding: 10px 12px;"><span style="font-weight: 500;">B2B leads</span><span style="display: block; font-size: 12px; color: var(--ink-subtle);">456-789-0123</span></td>
+                  <td style="padding: 10px 12px; color: var(--ink-muted);">NOK · Europe/Oslo</td>
+                  <td style="padding: 10px 12px;">Today 06:04</td>
+                  <td style="padding: 10px 12px; color: var(--ink-muted);">Backfilling, 9 of 13 months</td>
+                  <td style="padding: 10px 20px 10px 12px; color: var(--good); font-weight: 500;">Matches Google, 0.0% off</td>
+                </tr>
+                <tr style="border-top: 1px solid var(--border); color: var(--ink-subtle);">
+                  <td style="padding: 10px 20px;"><input type="checkbox" class="keel-check" aria-label="Include Old brand test"></td>
+                  <td style="padding: 10px 12px;"><span style="font-weight: 500;">Old brand test</span><span style="display: block; font-size: 12px;">567-890-1234</span></td>
+                  <td style="padding: 10px 12px;">NOK · Europe/Oslo</td>
+                  <td style="padding: 10px 12px;">Not synced</td>
+                  <td style="padding: 10px 12px;">—</td>
+                  <td style="padding: 10px 20px 10px 12px;">Not included</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="jobs-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+          <h2 id="jobs-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Sync jobs</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px;">
+            <div><span style="display: block; font-weight: 500;">Structure</span><span style="color: var(--ink-muted);">Nightly 03:00 · last ran 03:02, OK</span></div>
+            <div><span style="display: block; font-weight: 500;">Daily stats and search terms</span><span style="color: var(--ink-muted);">Nightly 04:00 · last ran 04:11, OK</span></div>
+            <div><span style="display: block; font-weight: 500;">Intraday</span><span style="color: var(--ink-muted);">Every 2 hours · last ran 06:04, OK</span></div>
+            <div><span style="display: block; font-weight: 500;">Changes made elsewhere</span><span style="color: var(--ink-muted);">With intraday · 1 found this week</span></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="more-h" style="display: flex; flex-direction: column; gap: 10px;">
+          <h2 id="more-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Other ad platforms</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+            <div style="border: 1px dashed var(--border-strong); border-radius: var(--radius-lg); padding: 16px 20px; color: var(--ink-muted); display: flex; flex-direction: column; gap: 4px;"><span style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-weight: 500; color: var(--ink);">Meta<x-import component-from-global-scope="Keel.StatusPill" status="preview">Next, phase 4</x-import></span><span>Read-only first: Keel asks only to read reports. Changing budgets and caps is switched on per account later.</span><a href="OverviewPlatforms.dc.html" style="font-size: 13px; font-weight: 500;">See how it will look</a></div>
+            <div style="border: 1px dashed var(--border-strong); border-radius: var(--radius-lg); padding: 16px 20px; color: var(--ink-muted); display: flex; flex-direction: column; gap: 4px;"><span style="font-weight: 500; color: var(--ink);">Microsoft Advertising</span><span>Planned after Meta</span></div>
+          </div>
+        </section>
+
+        <p style="margin: 0; font-size: 13px; color: var(--ink-subtle);">Linking opens Google's sign-in, which asks for a passkey on your Google account. Keel stores the access it is given encrypted, and unlinking revokes it at Google straight away.</p>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, two: 2, three: 3 }; }
+}
+</script>
+</body>
+</html>
