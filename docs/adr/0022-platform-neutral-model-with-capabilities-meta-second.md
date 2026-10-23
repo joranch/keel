@@ -1,6 +1,6 @@
 # 0022. Platform-neutral model with capabilities; Meta as the second platform
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-23
 - **Deciders:** Jøran
 - **Links:** NFR-MNT-1.4; FR-META-1 to 6; FR-COPY-1 to 5; Readiness B3 (metric dictionary); ADR 0005, 0006, 0009; stories 0.3.3, 0.4.1, 0.4.2, 0.7.1, epics 3.7, 4.2 and 4.6

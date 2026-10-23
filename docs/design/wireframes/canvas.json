@@ -1,0 +1,185 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-22T07:15:00Z"
+  },
+  "title": "Keel wireframes",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Signin.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "Sign-in",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Main.dc.html": {
+      "x": 1520,
+      "y": 0,
+      "w": 1440,
+      "h": 1320,
+      "title": "Overview",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "AlertDetail.dc.html": {
+      "x": 3040,
+      "y": 0,
+      "w": 1440,
+      "h": 1260,
+      "title": "Alert detail",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Explorer.dc.html": {
+      "x": 4560,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "title": "Explorer",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "SearchTerms.dc.html": {
+      "x": 0,
+      "y": 1700,
+      "w": 1440,
+      "h": 1160,
+      "title": "Search terms and n-grams",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Approvals.dc.html": {
+      "x": 1520,
+      "y": 1700,
+      "w": 1440,
+      "h": 980,
+      "title": "Approvals",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "ChangeReview.dc.html": {
+      "x": 3040,
+      "y": 1700,
+      "w": 1440,
+      "h": 1000,
+      "title": "Change review",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "RuleBuilder.dc.html": {
+      "x": 4560,
+      "y": 1700,
+      "w": 1440,
+      "h": 1300,
+      "title": "Rule builder",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Accounts.dc.html": {
+      "x": 0,
+      "y": 3400,
+      "w": 1440,
+      "h": 960,
+      "title": "Accounts and connections",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "OverviewPlatforms.dc.html": {
+      "x": 0,
+      "y": 4700,
+      "w": 1440,
+      "h": 1320,
+      "title": "Overview with Meta (phase 4)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "RuleTemplate.dc.html": {
+      "x": 1520,
+      "y": 4700,
+      "w": 1440,
+      "h": 960,
+      "title": "Apply a rule to other accounts (phase 3)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "CopyCampaign.dc.html": {
+      "x": 3040,
+      "y": 4700,
+      "w": 1440,
+      "h": 1180,
+      "title": "Copy a campaign within Google (phase 3)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "CopyToMeta.dc.html": {
+      "x": 4560,
+      "y": 4700,
+      "w": 1440,
+      "h": 1460,
+      "title": "Copy a campaign to Meta (phase 4)",
+      "expand": "fill",
+      "is_interactive": true
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Signin.dc.html",
+    "AlertDetail.dc.html",
+    "Explorer.dc.html",
+    "SearchTerms.dc.html",
+    "Approvals.dc.html",
+    "ChangeReview.dc.html",
+    "RuleBuilder.dc.html",
+    "Accounts.dc.html",
+    "OverviewPlatforms.dc.html",
+    "RuleTemplate.dc.html",
+    "CopyCampaign.dc.html",
+    "CopyToMeta.dc.html"
+  ],
+  "notes": {
+    "row1": {
+      "x": 0,
+      "y": -300,
+      "text": "Morning check: sign in, see what needs attention, follow it to the cause",
+      "kind": "title1",
+      "maxW": 6000
+    },
+    "row2": {
+      "x": 0,
+      "y": 1400,
+      "text": "From waste to a safe change: find it, review it, approve it, automate it",
+      "kind": "title1",
+      "maxW": 6000
+    },
+    "row3": {
+      "x": 0,
+      "y": 3100,
+      "text": "Setup: link and monitor ad accounts",
+      "kind": "title1",
+      "maxW": 1440
+    },
+    "row4": {
+      "x": 0,
+      "y": 4400,
+      "text": "Later phases: Meta side by side, and reusing what works across accounts and platforms",
+      "kind": "title1",
+      "maxW": 6000
+    }
+  },
+  "designSystems": [
+    {
+      "title": "Keel",
+      "namespace": "keel",
+      "artifact": "https://claude.ai/artifact/AwhatSLnLRwp5hMLsq3bvY",
+      "version": "1792618122-e2b1",
+      "copiedAt": "2026-10-22T07:15:00Z"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Copy a campaign to Meta</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="OverviewPlatforms.dc.html" count="{{three}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html" active="{{yes}}">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="RuleTemplate.dc.html" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="OverviewPlatforms.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="Webshop · Google and Meta" range="Last 30 days" compare="vs previous 30 days" freshness="Google 06:04 · Meta 06:10" alerts="{{three}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Breadcrumb" style="font-size: 13px; color: var(--ink-subtle);"><a href="OverviewPlatforms.dc.html">All accounts</a> › <a href="#">Webshop</a> › <a href="Explorer.dc.html">Shoes – Search NO</a> › Copy to Meta</nav>
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+        <div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">Copy Shoes – Search NO to Meta</h1>
+            <x-import component-from-global-scope="Keel.StatusPill" status="preview">Phase 4</x-import>
+          </div>
+          <p style="margin: 4px 0 0; color: var(--ink-muted);">Into Webshop – Meta. Search and Meta work differently, so Keel builds a draft and shows what changed on the way. Check it, approve the ad copy, then create it paused.</p>
+        </div>
+        <a href="CopyCampaign.dc.html" style="font-size: 13px; font-weight: 500;">Copy within Google instead</a>
+      </header>
+
+      <sc-if value="{{created}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 14px 20px; border-radius: var(--radius-lg); background: var(--good-subtle); border: 1px solid var(--border);">
+          <span style="font-weight: 600; color: var(--good);">Created paused in Webshop – Meta</span>
+          <span style="flex-grow: 1;">1 campaign, 2 ad sets and 4 ads, read back from Meta. Nothing spends until you turn it on.</span>
+          <a href="Approvals.dc.html#recent" style="font-weight: 500;">Undo</a>
+          <a href="OverviewPlatforms.dc.html" style="font-weight: 500;">Back to overview</a>
+        </div>
+      </sc-if>
+
+      <section aria-labelledby="map-h" style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 id="map-h" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">What carries over</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 12px;">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-weight: 600; color: var(--good);">Carried over</span><span style="font-size: 13px; color: var(--ink-muted);">5</span></div>
+            <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
+              <li>Goal: purchases, using the Meta pixel's Purchase event</li>
+              <li>Budget: 450 NOK a day</li>
+              <li>Location: Norway</li>
+              <li>Languages: Norwegian</li>
+              <li>12 landing pages</li>
+            </ul>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-weight: 600; color: var(--warning);">Approximated</span><span style="font-size: 13px; color: var(--ink-muted);">3, check these</span></div>
+            <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
+              <li>Target CPA 250 NOK became a cost per result goal of 250 NOK</li>
+              <li>Keyword themes became interest suggestions: running, trail running</li>
+              <li>6 ad groups became 2 ad sets, one per theme</li>
+            </ul>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font-weight: 600; color: var(--ink-muted);">Dropped</span><span style="font-size: 13px; color: var(--ink-muted);">3, no Meta equivalent</span></div>
+            <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
+              <li>84 keywords and their match types</li>
+              <li>41 negative keywords</li>
+              <li>Sitelinks and callouts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 3 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+          <section aria-labelledby="copy-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline;">
+              <div>
+                <h2 id="copy-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Ad copy for Meta</h2>
+                <p style="margin: 2px 0 0; font-size: 13px; color: var(--ink-muted);">Rewritten by the assistant from your Search ads, within Meta's recommended lengths. Approve each line or edit it.</p>
+              </div>
+              <span style="font-size: 13px; font-weight: 500; color: {{approvedColor}};">{{approvedLabel}}</span>
+            </div>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; min-width: 720px;">
+                <thead>
+                  <tr style="background: var(--surface-sunken); color: var(--ink-muted); font-size: 12px; text-align: left;">
+                    <th scope="col" style="padding: 8px 20px; font-weight: 500;">From the Search ad</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500;">For Meta</th>
+                    <th scope="col" style="padding: 8px 20px 8px 12px; font-weight: 500; text-align: right;">Decision</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{lines}}" as="l" hint-placeholder-count="5">
+                    <tr style="border-top: 1px solid var(--border); background: {{l.bg}};">
+                      <td style="padding: 10px 20px; color: var(--ink-muted); font-size: 13px;">{{l.from}}</td>
+                      <td style="padding: 10px 12px;"><span style="display: block; font-size: 12px; color: var(--ink-subtle);">{{l.slot}}</span><span style="font-weight: 500;">{{l.to}}</span></td>
+                      <td style="padding: 10px 20px 10px 12px; text-align: right; white-space: nowrap;">
+                        <div style="display: inline-flex; gap: 8px;">
+                          <x-import component-from-global-scope="Keel.Button" size="sm" variant="ghost">Edit</x-import>
+                          <x-import component-from-global-scope="Keel.Button" size="sm" variant="{{l.variant}}" on-click="{{l.toggle}}">{{l.action}}</x-import>
+                        </div>
+                      </td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section aria-labelledby="img-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline;">
+              <div>
+                <h2 id="img-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Images and video</h2>
+                <p style="margin: 2px 0 0; font-size: 13px; color: var(--ink-muted);">Search ads have none, so these come from the Shoes – PMax NO asset group.</p>
+              </div>
+              <x-import component-from-global-scope="Keel.Button" size="sm" variant="secondary">Upload more</x-import>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px;">
+              <div role="img" aria-label="Placeholder: running shoe, square image" style="aspect-ratio: 1; border-radius: var(--radius-md); background: var(--surface-sunken); border: 1px dashed var(--border-strong); display: flex; align-items: flex-end; padding: 8px; font-size: 12px; color: var(--ink-muted);">Square · 1:1</div>
+              <div role="img" aria-label="Placeholder: trail shoe, square image" style="aspect-ratio: 1; border-radius: var(--radius-md); background: var(--surface-sunken); border: 1px dashed var(--border-strong); display: flex; align-items: flex-end; padding: 8px; font-size: 12px; color: var(--ink-muted);">Square · 1:1</div>
+              <div role="img" aria-label="Placeholder: lifestyle photo, vertical image" style="aspect-ratio: 1; border-radius: var(--radius-md); background: var(--surface-sunken); border: 1px dashed var(--border-strong); display: flex; align-items: flex-end; padding: 8px; font-size: 12px; color: var(--ink-muted);">Vertical · 4:5</div>
+              <div role="img" aria-label="Placeholder: product video" style="aspect-ratio: 1; border-radius: var(--radius-md); background: var(--surface-sunken); border: 1px dashed var(--border-strong); display: flex; align-items: flex-end; padding: 8px; font-size: 12px; color: var(--ink-muted);">Video · 15 s</div>
+            </div>
+            <p style="margin: 0; font-size: 13px; color: var(--warning);">Meta recommends a vertical 9:16 version for Stories and Reels. None found.</p>
+          </section>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: flex-end;">
+            <span style="font-size: 13px; color: var(--ink-subtle);">{{footNote}}</span>
+            <a href="Explorer.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); color: var(--ink); text-decoration: none; font-weight: 500;">Cancel</a>
+            <x-import component-from-global-scope="Keel.Button" variant="primary" confirm="hold" disabled="{{blocked}}" on-click="{{create}}">Create paused on Meta</x-import>
+          </div>
+        </div>
+
+        <aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="draft-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="draft-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">The draft on Meta</h2>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+              <li><span style="display: block; font-weight: 500;">Campaign: Shoes – NO (from Search)</span><span style="color: var(--ink-muted);">Sales objective · paused · 450 NOK a day</span>
+                <ul style="margin: 8px 0 0; padding-left: 16px; border-left: 1px solid var(--border); list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                  <li><span style="display: block; font-weight: 500;">Ad set: Running</span><span style="color: var(--ink-muted);">Norway · interest: running · 2 ads</span></li>
+                  <li><span style="display: block; font-weight: 500;">Ad set: Trail</span><span style="color: var(--ink-muted);">Norway · interest: trail running · 2 ads</span></li>
+                </ul>
+              </li>
+            </ul>
+            <a href="#" style="font-size: 13px; font-weight: 500;">Change ad sets or audiences</a>
+          </section>
+          <section aria-labelledby="count-h" style="background: var(--info-subtle); border-radius: var(--radius-lg); padding: 16px 20px; font-size: 13px; display: flex; flex-direction: column; gap: 6px;">
+            <h2 id="count-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Results are counted differently</h2>
+            <span>Meta also counts conversions after someone only saw an ad. Compare the copy with the Search campaign side by side, not as one total.</span>
+          </section>
+          <section aria-labelledby="h-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px;">
+            <h2 id="h-h" style="margin: 0 0 10px; font-size: 15px; line-height: 22px; font-weight: 600;">What happens when you create</h2>
+            <ol style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+              <li>You confirm with your passkey.</li>
+              <li>Meta checks the draft before anything is made.</li>
+              <li>Everything is created paused, then read back.</li>
+              <li>Undo removes it while it has never run.</li>
+            </ol>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1460}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { ok: { l1: true, l2: true }, created: false };
+  }
+  renderVals() {
+    var self = this;
+    var data = [
+      { id: 'l1', from: 'Headline: Running shoes for women', slot: 'Headline · 40 characters recommended', to: 'Running shoes made for your stride' },
+      { id: 'l2', from: 'Headline: Free shipping over 499 NOK', slot: 'Headline · 40 characters recommended', to: 'Free shipping over 499 NOK' },
+      { id: 'l3', from: 'Description: Find your next pair. Wide range of sizes and brands in stock.', slot: 'Primary text · 125 characters recommended', to: 'Your next pair is waiting. Sizes and brands in stock, delivered across Norway.' },
+      { id: 'l4', from: 'Description: Trail shoes with grip for Norwegian terrain.', slot: 'Primary text · 125 characters recommended', to: 'Grip for wet rock, roots and gravel. Trail shoes built for Norwegian terrain.' },
+      { id: 'l5', from: 'Call to action (none in Search)', slot: 'Button', to: 'Shop now' }
+    ];
+    var ok = this.state.ok;
+    var n = data.filter(function (d) { return ok[d.id]; }).length;
+    var left = data.length - n;
+    return {
+      yes: true, three: 3,
+      created: this.state.created,
+      approvedLabel: n + ' of ' + data.length + ' approved',
+      approvedColor: left === 0 ? 'var(--good)' : 'var(--warning)',
+      blocked: left > 0,
+      footNote: left === 0 ? 'Hold to create, then confirm with your passkey' : 'Approve the remaining ' + left + (left === 1 ? ' line' : ' lines') + ' first',
+      create: function () { self.setState({ created: true }); },
+      lines: data.map(function (d) {
+        var on = !!ok[d.id];
+        return Object.assign({}, d, {
+          bg: on ? 'var(--good-subtle)' : 'var(--surface)',
+          variant: on ? 'secondary' : 'primary',
+          action: on ? 'Approved' : 'Approve',
+          toggle: function () { var next = Object.assign({}, self.state.ok); next[d.id] = !next[d.id]; self.setState({ ok: next }); }
+        });
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

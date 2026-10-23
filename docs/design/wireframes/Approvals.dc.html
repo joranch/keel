@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Automate: approvals</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="Main.dc.html" count="{{two}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="Approvals.dc.html" active="{{yes}}" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="Main.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="All accounts (3)" range="Last 7 days" compare="vs previous 7 days" freshness="Synced 06:04" alerts="{{two}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+        <div>
+          <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">Automate</h1>
+          <p style="margin: 4px 0 0; color: var(--ink-muted);">Changes your rules propose, waiting for you. Nothing here reaches Google until you approve it.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+          <span style="font-size: 13px; color: var(--ink-muted); display: inline-flex; align-items: center; gap: 6px;"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: var(--good);"></span>Automation running · 6 rules</span>
+          <x-import component-from-global-scope="Keel.Button" variant="danger" size="sm">Stop all automation</x-import>
+          <a href="RuleBuilder.dc.html" style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500; font-size: 13px;">New rule</a>
+        </div>
+      </header>
+
+      <div role="tablist" aria-label="Automate sections" style="display: flex; gap: 24px; border-bottom: 1px solid var(--border);">
+        <a role="tab" aria-selected="true" href="Approvals.dc.html" style="padding: 8px 0; margin-bottom: -1px; border-bottom: 2px solid var(--accent); color: var(--ink); font-weight: 500; text-decoration: none;">Waiting for you (3)</a>
+        <a role="tab" aria-selected="false" href="RuleBuilder.dc.html" style="padding: 8px 0; color: var(--ink-muted); text-decoration: none;">Rules (6)</a>
+        <a role="tab" aria-selected="false" href="#recent" style="padding: 8px 0; color: var(--ink-muted); text-decoration: none;">Recent changes</a>
+      </div>
+
+      <section aria-label="Waiting for approval" style="display: flex; flex-direction: column; gap: 12px;">
+        <article style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+          <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+              <h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">CPA bid-down</h2>
+              <x-import component-from-global-scope="Keel.StatusPill" status="pending">4 changes</x-import>
+              <span style="font-size: 12px; font-weight: 500; color: var(--warning);">Bids · hold to confirm</span>
+            </div>
+            <p style="margin: 0;">Lowers bids 15% on 3 keywords and pauses 1 keyword that spent 1 840 NOK in 30 days with no conversions.</p>
+            <p style="margin: 0; font-size: 13px; color: var(--ink-subtle);">Webshop · proposed 21 Oct 06:12 · data as of 06:04 · expires in 18 h</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <x-import component-from-global-scope="Keel.Button" variant="ghost">Reject</x-import>
+            <a href="ChangeReview.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500;">Review</a>
+          </div>
+        </article>
+        <article style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+          <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+              <h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Non-converting search terms</h2>
+              <x-import component-from-global-scope="Keel.StatusPill" status="pending">12 changes</x-import>
+            </div>
+            <p style="margin: 0;">Adds 12 exact-match negatives for search terms that spent 1 120 NOK with no conversions.</p>
+            <p style="margin: 0; font-size: 13px; color: var(--ink-subtle);">Webshop and Outlet · proposed 21 Oct 06:10 · expires in 22 h</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <x-import component-from-global-scope="Keel.Button" variant="ghost">Reject</x-import>
+            <a href="ChangeReview.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500;">Review</a>
+          </div>
+        </article>
+        <article style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+          <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+              <h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Fund budget-limited winners</h2>
+              <x-import component-from-global-scope="Keel.StatusPill" status="pending">1 change</x-import>
+              <span style="font-size: 12px; font-weight: 500; color: var(--warning);">Budget · hold to confirm</span>
+            </div>
+            <p style="margin: 0;">Raises the daily budget of Running – Search NO from 900 to 1 035 NOK. It lost 24% of impressions to budget at a CPA of 198, below the 250 target.</p>
+            <p style="margin: 0; font-size: 13px; color: var(--ink-subtle);">Webshop · proposed 21 Oct 06:12 · expires in 23 h</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <x-import component-from-global-scope="Keel.Button" variant="ghost">Reject</x-import>
+            <a href="ChangeReview.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500;">Review</a>
+          </div>
+        </article>
+      </section>
+
+      <section id="recent" aria-labelledby="recent-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; padding: 16px 20px;">
+          <h2 id="recent-h" style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600;">Recent changes</h2>
+          <span style="font-size: 13px; color: var(--ink-subtle);">Everything that changed your accounts, from Keel or elsewhere · undo within 30 days</span>
+        </div>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 820px;">
+            <thead>
+              <tr style="background: var(--surface-sunken); color: var(--ink-muted); font-size: 12px; text-align: left;">
+                <th scope="col" style="padding: 8px 20px; font-weight: 500;">When</th>
+                <th scope="col" style="padding: 8px 12px; font-weight: 500;">Source</th>
+                <th scope="col" style="padding: 8px 12px; font-weight: 500;">What changed</th>
+                <th scope="col" style="padding: 8px 12px; font-weight: 500;">Status</th>
+                <th scope="col" style="padding: 8px 20px 8px 12px; font-weight: 500;"><span class="keel-sr">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px; color: var(--ink-muted);">20 Oct 06:30</td><td style="padding: 10px 12px;">Rule: Monthly spend cap</td><td style="padding: 10px 12px;">Paused Outlet – Display at its 3 000 NOK cap</td><td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.StatusPill" status="auto">Applied automatically</x-import></td><td style="padding: 10px 20px 10px 12px;"><a href="#">Undo</a></td></tr>
+              <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px; color: var(--ink-muted);">18 Oct 07:02</td><td style="padding: 10px 12px;">You, in Explorer</td><td style="padding: 10px 12px;">Added label “review” to 2 keywords</td><td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.StatusPill" status="applied"></x-import></td><td style="padding: 10px 20px 10px 12px;"><a href="#">Undo</a></td></tr>
+              <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px; color: var(--ink-muted);">14 Oct 07:05</td><td style="padding: 10px 12px;">Rule: Nudge target CPA</td><td style="padding: 10px 12px;">B2B – Search NO target CPA 260 → 235 NOK</td><td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.StatusPill" status="applied"></x-import></td><td style="padding: 10px 20px 10px 12px;"><a href="#">Undo</a></td></tr>
+              <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px; color: var(--ink-muted);">11 Oct 07:01</td><td style="padding: 10px 12px;">Rule: Zero-conversion keywords</td><td style="padding: 10px 12px;">Paused 4 keywords</td><td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.StatusPill" status="applied"></x-import></td><td style="padding: 10px 20px 10px 12px;"><a href="#">Undo</a></td></tr>
+              <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px; color: var(--ink-muted);">10 Oct 09:14</td><td style="padding: 10px 12px;">Google, auto-applied recommendation</td><td style="padding: 10px 12px;">Added 3 broad-match keywords to Shoes – Search NO</td><td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.StatusPill" status="external"></x-import></td><td style="padding: 10px 20px 10px 12px;"><a href="#">Revert</a></td></tr>
+              <tr style="border-top: 1px solid var(--border);"><td style="padding: 10px 20px; color: var(--ink-muted);">30 Sep 07:00</td><td style="padding: 10px 12px;">Rule: Fund budget-limited winners</td><td style="padding: 10px 12px;">Webshop – Search NO daily budget +15%</td><td style="padding: 10px 12px;"><x-import component-from-global-scope="Keel.StatusPill" status="applied"></x-import></td><td style="padding: 10px 20px 10px 12px;"><a href="#">Undo</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, two: 2, three: 3 }; }
+}
+</script>
+</body>
+</html>

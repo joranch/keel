@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rule builder</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+select,input{font:400 14px/20px var(--font-sans);color:var(--ink)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="Main.dc.html" count="{{two}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="Approvals.dc.html" active="{{yes}}" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="Main.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="Webshop" range="Last 30 days" compare="vs previous 30 days" freshness="Synced 06:04" alerts="{{two}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Breadcrumb" style="font-size: 13px; color: var(--ink-subtle);"><a href="Approvals.dc.html">Automate</a> › Rules › CPA bid-down</nav>
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+        <div>
+          <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">CPA bid-down</h1>
+          <p style="margin: 4px 0 0; color: var(--ink-muted);">From the template “Expensive keywords” · version 3 · runs weekly in approve mode</p>
+        </div>
+        <div role="group" aria-label="Editor" style="display: inline-flex; padding: 3px; border-radius: var(--radius-md); background: var(--surface-sunken); gap: 2px;">
+          <button type="button" onClick="{{showBuilder}}" aria-pressed="{{isBuilder}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: var(--radius-sm); font: 500 13px/18px var(--font-sans); cursor: pointer; background: {{builderBg}}; color: var(--ink);">Builder</button>
+          <button type="button" onClick="{{showJson}}" aria-pressed="{{isJson}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: var(--radius-sm); font: 500 13px/18px var(--font-sans); cursor: pointer; background: {{jsonBg}}; color: var(--ink);">JSON</button>
+        </div>
+      </header>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 3 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <sc-if defaultValue="{{isBuilder}}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <section aria-labelledby="s-scope" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+                <h2 id="s-scope" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">1. What it looks at</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Accounts
+                    <select style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Webshop</option><option>All accounts</option></select>
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Campaign type
+                    <select style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Search</option><option>Shopping</option></select>
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Level
+                    <select style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Keyword</option><option>Ad group</option><option>Search term</option></select>
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Window
+                    <select style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Last 30 days</option><option>Grow 7 → 90 days until 10 conversions</option></select>
+                  </label>
+                </div>
+                <label style="display: flex; gap: 8px; align-items: center;"><input type="checkbox" class="keel-check" defaultChecked="{{yes}}">Leave out the 7 maturing days (measured conversion lag for Webshop)</label>
+                <p style="margin: 0; font-size: 13px; color: var(--ink-muted); background: var(--info-subtle); border-radius: var(--radius-md); padding: 8px 12px;">Bid actions only run on manually bid campaigns. 2 Smart Bidding campaigns in scope are skipped; use “Nudge target CPA” for those.</p>
+              </section>
+
+              <section aria-labelledby="s-cond" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+                <h2 id="s-cond" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">2. When all of these are true</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                  <select aria-label="Metric" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>CPA</option><option>Cost</option><option>Conversions</option></select>
+                  <select aria-label="Operator" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>is more than</option><option>is less than</option></select>
+                  <input aria-label="Percent" defaultValue="15" style="width: 64px; height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); text-align: right;">
+                  <span>% above</span>
+                  <select aria-label="Compared with" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>the campaign's CPA goal (Goals)</option><option>the campaign's CPA</option><option>a fixed amount</option></select>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                  <select aria-label="Metric" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Status</option></select>
+                  <select aria-label="Operator" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>is</option></select>
+                  <select aria-label="Value" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Enabled</option></select>
+                </div>
+                <div style="display: flex; gap: 16px; font-size: 13px;"><a href="#">+ Add condition</a><a href="#">+ Add “any of” group</a></div>
+              </section>
+
+              <section aria-labelledby="s-guard" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+                <h2 id="s-guard" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">3. Only with enough data</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px;">
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Expected conversions at least
+                    <input defaultValue="3" style="height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md);">
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Clicks at least
+                    <input defaultValue="30" style="height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md);">
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">At most per run
+                    <input defaultValue="50 keywords" style="height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md);">
+                  </label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Then leave alone for
+                    <input defaultValue="7 days" style="height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md);">
+                  </label>
+                </div>
+              </section>
+
+              <section aria-labelledby="s-act" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+                <h2 id="s-act" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">4. Then do this</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                  <select aria-label="Action" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Lower Max CPC</option><option>Pause</option><option>Add label</option><option>Alert only</option></select>
+                  <span>by</span>
+                  <input aria-label="Percent" defaultValue="15" style="width: 64px; height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); text-align: right;">
+                  <span>%, never below</span>
+                  <input aria-label="Minimum bid" defaultValue="1,00 NOK" style="width: 96px; height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md);">
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-top: 8px; border-top: 1px solid var(--border);">
+                  <span style="color: var(--ink-muted);">But if conversions are 0 with 3 or more expected:</span>
+                  <select aria-label="Instead" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Pause instead</option><option>Lower bid as above</option></select>
+                </div>
+                <p style="margin: 0; font-size: 13px; color: var(--ink-subtle);">Bid steps are capped at 20% per run, the largest change that does not unsettle performance.</p>
+              </section>
+
+              <section aria-labelledby="s-run" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+                <h2 id="s-run" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">5. How and when it runs</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                  <select aria-label="Frequency" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Weekly</option><option>Daily</option><option>Manual</option></select>
+                  <span>on</span>
+                  <select aria-label="Day" style="height: 36px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface);"><option>Monday</option></select>
+                  <span>after the nightly sync</span>
+                </div>
+                <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+                  <legend style="font-size: 13px; color: var(--ink-muted); margin-bottom: 6px;">Mode</legend>
+                  <label style="display: flex; gap: 8px; align-items: flex-start;"><input type="radio" name="mode" style="accent-color: var(--accent); margin-top: 3px;"><span><strong style="font-weight: 500;">Preview only</strong><span style="display: block; font-size: 13px; color: var(--ink-muted);">Shows what it would change; never changes anything</span></span></label>
+                  <label style="display: flex; gap: 8px; align-items: flex-start;"><input type="radio" name="mode" defaultChecked="{{yes}}" style="accent-color: var(--accent); margin-top: 3px;"><span><strong style="font-weight: 500;">Approve each run</strong><span style="display: block; font-size: 13px; color: var(--ink-muted);">Proposes changes; you approve them in Automate</span></span></label>
+                  <label style="display: flex; gap: 8px; align-items: flex-start; color: var(--ink-subtle);"><input type="radio" name="mode" disabled="{{yes}}" style="margin-top: 3px;"><span><strong style="font-weight: 500;">Apply automatically</strong><span style="display: block; font-size: 13px;">Unlocks after 4 weeks of approved runs with nothing wrong</span></span></label>
+                </fieldset>
+              </section>
+            </div>
+          </sc-if>
+          <sc-if defaultValue="{{isJson}}" hint-placeholder-val="{{ false }}">
+            <section aria-label="Rule JSON" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px;">
+              <pre style="margin: 0; font: 400 13px/20px var(--font-mono); white-space: pre-wrap; color: var(--ink);">{{json}}</pre>
+              <p style="margin: 12px 0 0; font-size: 13px; color: var(--good);">Valid against rule.v1.json</p>
+            </section>
+          </sc-if>
+        </div>
+
+        <aside style="flex: 2 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="t-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 16px 20px;">
+              <h2 id="t-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Test run</h2>
+              <button type="button" onClick="{{runTest}}" style="height: 28px; padding: 0 12px; border-radius: var(--radius-md); border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); font: 500 13px/18px var(--font-sans); cursor: pointer;">{{testLabel}}</button>
+            </div>
+            <sc-if defaultValue="{{tested}}" hint-placeholder-val="{{ true }}">
+              <div>
+                <p style="margin: 0; padding: 0 20px 12px; font-size: 13px; color: var(--ink-muted);">On today's data: <strong style="color: var(--ink); font-weight: 600;">4 of 31 keywords</strong> would change. Nothing was saved or sent.</p>
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums;">
+                  <tbody>
+                    <tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 20px;">running shoes women</td><td style="padding: 8px 20px; text-align: right;">9,40 → <strong style="font-weight: 600;">8,00</strong></td></tr>
+                    <tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 20px;">trail running shoes</td><td style="padding: 8px 20px; text-align: right;">7,10 → <strong style="font-weight: 600;">6,04</strong></td></tr>
+                    <tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 20px;">shoes sale</td><td style="padding: 8px 20px; text-align: right;">5,50 → <strong style="font-weight: 600;">4,68</strong></td></tr>
+                    <tr style="border-top: 1px solid var(--border);"><td style="padding: 8px 20px;">cheap sneakers</td><td style="padding: 8px 20px; text-align: right;"><strong style="font-weight: 600;">Pause</strong></td></tr>
+                  </tbody>
+                </table>
+                <div style="padding: 12px 20px; border-top: 1px solid var(--border); background: var(--surface-sunken); font-size: 13px; color: var(--ink-muted);">
+                  <strong style="font-weight: 500; color: var(--ink);">Held back by the data guard:</strong> “free running shoes” (1.8 expected conversions) and “wholesale shoes” (1.5).
+                </div>
+              </div>
+            </sc-if>
+            <sc-if defaultValue="{{notTested}}" hint-placeholder-val="{{ false }}">
+              <p style="margin: 0; padding: 0 20px 16px; font-size: 13px; color: var(--ink-muted);">Run a test to see exactly what this rule would change today. Nothing is saved or sent.</p>
+            </sc-if>
+          </section>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <a href="Approvals.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 500;">Save rule</a>
+            <x-import component-from-global-scope="Keel.Button" variant="secondary">Save as draft</x-import>
+            <a href="Approvals.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 8px; color: var(--ink-muted);">Cancel</a>
+          </div>
+          <section style="background: var(--surface-sunken); border-radius: var(--radius-lg); padding: 16px 20px; font-size: 13px; color: var(--ink-muted); display: flex; flex-direction: column; gap: 6px;">
+            <h2 style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600; color: var(--ink);">Last runs</h2>
+            <span>21 Oct · 4 proposed · waiting for you</span>
+            <span>14 Oct · 2 proposed · 2 applied</span>
+            <span>7 Oct · 0 proposed</span>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'builder', tested: true };
+  }
+  renderVals() {
+    var self = this;
+    var rule = {
+      schemaVersion: 1,
+      name: 'CPA bid-down',
+      scope: { accounts: ['Webshop'], campaignTypes: ['SEARCH'], biddingStrategies: ['MANUAL_CPC'] },
+      level: 'keyword',
+      window: { days: 30, excludeMaturing: true },
+      conditions: { all: [
+        { metric: 'cpa', op: '>', value: { ref: 'target', metric: 'cpa', times: 1.15 } },
+        { metric: 'status', op: '=', value: 'ENABLED' }
+      ] },
+      guards: { minExpectedConversions: 3, minClicks: 30, maxEntities: 50, cooldownDays: 7 },
+      actions: [
+        { type: 'change_bid', byPct: -15, maxStepPct: 20, min: 1.0 },
+        { type: 'pause', when: { metric: 'conversions', op: '=', value: 0 } }
+      ],
+      schedule: { weekly: { day: 'MON', time: 'after_sync' } },
+      mode: 'approve'
+    };
+    var isBuilder = this.state.view === 'builder';
+    return {
+      yes: true, two: 2, three: 3,
+      isBuilder: isBuilder, isJson: !isBuilder,
+      builderBg: isBuilder ? 'var(--surface)' : 'transparent',
+      jsonBg: isBuilder ? 'transparent' : 'var(--surface)',
+      showBuilder: function () { self.setState({ view: 'builder' }); },
+      showJson: function () { self.setState({ view: 'json' }); },
+      tested: this.state.tested, notTested: !this.state.tested,
+      testLabel: this.state.tested ? 'Run again' : 'Run test',
+      runTest: function () { self.setState({ tested: true }); },
+      json: JSON.stringify(rule, null, 2)
+    };
+  }
+}
+</script>
+</body>
+</html>

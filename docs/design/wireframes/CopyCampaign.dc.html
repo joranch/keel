@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Copy a campaign</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="Main.dc.html" count="{{two}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html" active="{{yes}}">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="Approvals.dc.html" count="{{three}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="Main.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="Webshop" range="Last 30 days" compare="vs previous 30 days" freshness="Synced 06:04" alerts="{{two}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Breadcrumb" style="font-size: 13px; color: var(--ink-subtle);"><a href="Main.dc.html">All accounts</a> › <a href="#">Webshop</a> › <a href="Explorer.dc.html">Shoes – Search NO</a> › Copy</nav>
+      <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+        <div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <h1 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;">Copy Shoes – Search NO</h1>
+            <x-import component-from-global-scope="Keel.StatusPill" status="preview">Phase 3</x-import>
+          </div>
+          <p style="margin: 4px 0 0; color: var(--ink-muted);">A Search campaign with its ad groups, keywords, negatives, ads and settings. The copy is created paused.</p>
+        </div>
+        <a href="CopyToMeta.dc.html" style="font-size: 13px; font-weight: 500;">Copy to Meta instead</a>
+      </header>
+
+      <sc-if value="{{created}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 14px 20px; border-radius: var(--radius-lg); background: var(--good-subtle); border: 1px solid var(--border);">
+          <span style="font-weight: 600; color: var(--good);">Created paused in {{targetName}}</span>
+          <span style="flex-grow: 1;">Google confirmed every item on read-back. Nothing spends until you turn it on.</span>
+          <a href="Approvals.dc.html#recent" style="font-weight: 500;">Undo</a>
+          <a href="Explorer.dc.html" style="font-weight: 500;">Open the copy</a>
+        </div>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 3 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+          <fieldset style="margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 12px;">
+            <legend style="padding: 0 4px; font-size: 15px; font-weight: 600;">1. Where to</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+              <sc-for list="{{targets}}" as="t" hint-placeholder-count="2">
+                <label style="flex: 1 1 240px; display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: var(--radius-md); border: 1px solid {{t.border}}; background: {{t.bg}}; cursor: pointer;">
+                  <input type="radio" name="target" checked="{{t.checked}}" onChange="{{t.pick}}" style="margin-top: 3px;">
+                  <span><span style="display: block; font-weight: 500;">{{t.label}}</span><span style="font-size: 13px; color: var(--ink-muted);">{{t.detail}}</span></span>
+                </label>
+              </sc-for>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+              <label style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">New campaign name
+                <input type="text" defaultValue="{{newName}}" style="height: 36px; padding: 0 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); font: 400 14px/20px var(--font-sans); color: var(--ink); background: var(--surface);">
+              </label>
+              <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-muted);">Brand in ads and keywords
+                <input type="text" defaultValue="{{brand}}" style="height: 36px; padding: 0 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); font: 400 14px/20px var(--font-sans); color: var(--ink); background: var(--surface);">
+              </label>
+            </div>
+          </fieldset>
+
+          <section aria-labelledby="m-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline;">
+              <div>
+                <h2 id="m-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">2. Things that belong to the account</h2>
+                <p style="margin: 2px 0 0; font-size: 13px; color: var(--ink-muted);">Matched by name in {{targetName}}. Choose what to do with the ones Keel couldn't find.</p>
+              </div>
+              <span style="font-size: 13px; font-weight: 500; color: {{openColor}};">{{openLabel}}</span>
+            </div>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; min-width: 640px;">
+                <thead>
+                  <tr style="background: var(--surface-sunken); color: var(--ink-muted); font-size: 12px; text-align: left;">
+                    <th scope="col" style="padding: 8px 20px; font-weight: 500;">In Webshop</th>
+                    <th scope="col" style="padding: 8px 12px; font-weight: 500;">Kind</th>
+                    <th scope="col" style="padding: 8px 20px 8px 12px; font-weight: 500;">In {{targetName}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{items}}" as="i" hint-placeholder-count="5">
+                    <tr style="border-top: 1px solid var(--border);">
+                      <td style="padding: 10px 20px; font-weight: 500;">{{i.name}}</td>
+                      <td style="padding: 10px 12px; color: var(--ink-muted);">{{i.kind}}</td>
+                      <td style="padding: 10px 20px 10px 12px;">
+                        <sc-if value="{{i.matched}}" hint-placeholder-val="{{ true }}">
+                          <span style="color: var(--good); font-weight: 500;">{{i.match}}</span>
+                        </sc-if>
+                        <sc-if value="{{i.open}}" hint-placeholder-val="{{ false }}">
+                          <label style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+                            <span style="font-size: 13px; color: var(--warning); font-weight: 500;">Not found</span>
+                            <select onChange="{{i.choose}}" aria-label="{{i.chooseLabel}}" style="height: 32px; padding: 0 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); font: 400 13px/18px var(--font-sans); color: var(--ink); background: var(--surface);">
+                              <option value="">Choose…</option>
+                              <sc-for list="{{i.options}}" as="o" hint-placeholder-count="2">
+                                <option value="{{o}}">{{o}}</option>
+                              </sc-for>
+                            </select>
+                          </label>
+                        </sc-if>
+                      </td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: flex-end;">
+            <span style="font-size: 13px; color: var(--ink-subtle);">Hold to create, then confirm with your passkey</span>
+            <a href="Explorer.dc.html" style="display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: var(--radius-md); color: var(--ink); text-decoration: none; font-weight: 500;">Cancel</a>
+            <x-import component-from-global-scope="Keel.Button" variant="primary" confirm="hold" disabled="{{blocked}}" on-click="{{create}}">Create paused copy</x-import>
+          </div>
+        </div>
+
+        <aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="w-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="w-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">What will be created</h2>
+            <dl style="margin: 0; display: grid; grid-template-columns: 1fr max-content; gap: 6px 12px; font-size: 13px; font-variant-numeric: tabular-nums;">
+              <dt>Campaign, paused</dt><dd style="margin: 0; text-align: right;">1</dd>
+              <dt>Ad groups</dt><dd style="margin: 0; text-align: right;">6</dd>
+              <dt>Keywords</dt><dd style="margin: 0; text-align: right;">84</dd>
+              <dt>Negative keywords</dt><dd style="margin: 0; text-align: right;">41</dd>
+              <dt>Responsive search ads</dt><dd style="margin: 0; text-align: right;">12</dd>
+              <dt>Assets (sitelinks, callouts)</dt><dd style="margin: 0; text-align: right;">18</dd>
+            </dl>
+            <div style="border-top: 1px solid var(--border); padding-top: 10px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 12px; font-size: 13px;">
+              <span style="color: var(--ink-muted);">Budget</span><span>450 NOK a day, the same as the source; raise it after creating</span>
+              <span style="color: var(--ink-muted);">Bidding</span><span>Target CPA 250 NOK</span>
+              <span style="color: var(--ink-muted);">Locations</span><span>Norway</span>
+              <span style="color: var(--ink-muted);">Schedule</span><span>Every day, 06:00–23:00</span>
+            </div>
+          </section>
+          <section aria-labelledby="h-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px;">
+            <h2 id="h-h" style="margin: 0 0 10px; font-size: 15px; line-height: 22px; font-weight: 600;">What happens when you create</h2>
+            <ol style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+              <li>Google checks the whole copy before anything is made.</li>
+              <li>Everything is created paused, then read back to confirm.</li>
+              <li>A retry never makes a second copy.</li>
+              <li>Undo removes the copy while it has never run, and pauses it after that.</li>
+            </ol>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { target: 'outlet', choices: {}, created: false };
+  }
+  renderVals() {
+    var self = this;
+    var t = this.state.target;
+    var targetName = t === 'outlet' ? 'Outlet' : 'Webshop';
+    var all = [
+      { id: 'conv', name: 'Purchase', kind: 'Conversion action', outlet: 'Purchase', webshop: 'Same campaign account' },
+      { id: 'budget', name: 'Shoes daily', kind: 'Shared budget', outlet: null, webshop: 'Shoes daily', options: ['Create a new 450 NOK daily budget', 'Use Outlet main budget'] },
+      { id: 'neg1', name: 'Brand terms', kind: 'Negative keyword list', outlet: 'Brand terms', webshop: 'Brand terms' },
+      { id: 'neg2', name: 'Jobs and free', kind: 'Negative keyword list', outlet: null, webshop: 'Jobs and free', options: ['Copy the list to Outlet', 'Skip it'] },
+      { id: 'aud', name: 'Past buyers 180 days', kind: 'Audience, observation', outlet: null, webshop: 'Past buyers 180 days', options: ['Skip it', 'Use Outlet past buyers 90 days'] }
+    ];
+    var choices = this.state.choices;
+    var items = all.map(function (d) {
+      var found = t === 'outlet' ? d.outlet : d.webshop;
+      var open = !found;
+      return {
+        name: d.name, kind: d.kind, matched: !open, open: open,
+        match: found === 'Same campaign account' ? 'Same account' : 'Found: ' + found,
+        options: d.options || [], chooseLabel: 'What to do with ' + d.name,
+        unresolved: open && !choices[d.id],
+        choose: function (e) { var next = Object.assign({}, self.state.choices); next[d.id] = e && e.target ? e.target.value : 'x'; self.setState({ choices: next }); }
+      };
+    });
+    var left = items.filter(function (i) { return i.unresolved; }).length;
+    var opts = [
+      { id: 'outlet', label: 'Outlet', detail: 'Another Google Ads account · NOK · Europe/Oslo' },
+      { id: 'webshop', label: 'Webshop, as a new campaign', detail: 'For example a new region or a test' }
+    ];
+    return {
+      yes: true, two: 2, three: 3,
+      targetName: targetName,
+      newName: t === 'outlet' ? 'Shoes – Search NO (Outlet)' : 'Shoes – Search NO (copy)',
+      brand: targetName,
+      created: this.state.created,
+      blocked: left > 0,
+      openLabel: left === 0 ? 'All sorted' : left + (left === 1 ? ' to choose' : ' to choose'),
+      openColor: left === 0 ? 'var(--good)' : 'var(--warning)',
+      create: function () { self.setState({ created: true }); },
+      items: items,
+      targets: opts.map(function (o) {
+        var on = o.id === t;
+        return { label: o.label, detail: o.detail, checked: on, border: on ? 'var(--accent)' : 'var(--border)', bg: on ? 'var(--accent-subtle)' : 'var(--surface)', pick: function () { self.setState({ target: o.id, choices: {}, created: false }); } };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

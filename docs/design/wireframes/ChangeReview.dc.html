@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Review changes</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/keel/tokens.css">
+<link rel="stylesheet" href="ds/keel/components/bundle.css">
+<script src="ds/keel/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:var(--bg);font-family:var(--font-sans);color:var(--ink)}
+a{color:var(--accent-ink)}a:hover{color:var(--accent-hover)}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: var(--bg); font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px;">
+  <nav aria-label="Main" style="flex: 1 1 232px; box-sizing: border-box; background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 2px;">
+    <a href="Main.dc.html" aria-label="Keel home" style="display: flex; align-items: center; gap: 8px; padding: 4px 12px 16px; text-decoration: none; color: var(--ink);">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="11" width="24" height="3" rx="1.5" style="fill: var(--navy)"></rect><path d="M12.6 16h6.8l-2.2 12.2a1.2 1.2 0 0 1-2.4 0z" style="fill: var(--navy)"></path><circle cx="25" cy="6" r="2.5" style="fill: var(--accent)"></circle></svg>
+      <span style="font-weight: 600; font-size: 20px; letter-spacing: -0.02em;">keel</span>
+    </a>
+    <x-import component-from-global-scope="Keel.NavItem" icon="overview" href="Main.dc.html" count="{{two}}">Overview</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="explore" href="Explorer.dc.html">Explore</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="insights" href="SearchTerms.dc.html">Insights</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="automate" href="Approvals.dc.html" active="{{yes}}" count="{{waiting}}">Automate</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="budgets" href="Main.dc.html#pacing">Budgets</x-import>
+    <x-import component-from-global-scope="Keel.NavItem" icon="changes" href="Approvals.dc.html#recent">Changes</x-import>
+    <div style="flex-grow: 1; min-height: 24px;"></div>
+    <x-import component-from-global-scope="Keel.NavItem" icon="settings" href="Accounts.dc.html">Settings</x-import>
+  </nav>
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <x-import component-from-global-scope="Keel.ScopeBar" accounts="Webshop" range="Last 30 days" compare="vs previous 30 days" freshness="Synced 06:04" alerts="{{two}}"></x-import>
+    <main style="box-sizing: border-box; width: 100%; max-width: 1440px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Breadcrumb" style="font-size: 13px; color: var(--ink-subtle);"><a href="Approvals.dc.html">Automate</a> › <a href="Approvals.dc.html">Waiting for you</a> › CPA bid-down</nav>
+
+      <sc-if value="{{applied}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 14px 20px; border-radius: var(--radius-lg); background: var(--good-subtle); border: 1px solid var(--border);">
+          <span style="font-weight: 600; color: var(--good);">Applied {{appliedCount}} changes</span>
+          <span style="flex-grow: 1; color: var(--ink);">Google confirmed every value on read-back. Bids on these keywords are locked from rules for 7 days.</span>
+          <a href="Approvals.dc.html#recent" style="font-weight: 500;">Undo</a>
+          <a href="Approvals.dc.html" style="font-weight: 500;">Back to approvals</a>
+        </div>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 3 1 640px; min-width: 0;">
+          <x-import component-from-global-scope="Keel.ChangeReview" title="Review 4 changes" summary="Lowers bids 15% on 3 keywords and pauses 1 keyword that spent 1 840 NOK in 30 days with no conversions." source="Rule: CPA bid-down" source-status="pending" tier="money" changes="{{changes}}" on-apply="{{apply}}"></x-import>
+          <p style="margin: 12px 0 0; font-size: 13px; color: var(--ink-subtle);">Untick a row to leave it out. Bid changes need a press-and-hold on Apply.</p>
+        </div>
+
+        <aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="why-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="why-h" style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 600;">Why these changes</h2>
+            <dl style="margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 12px; font-size: 13px;">
+              <dt style="color: var(--ink-muted);">Rule</dt><dd style="margin: 0;"><a href="RuleBuilder.dc.html">CPA bid-down</a>, version 3</dd>
+              <dt style="color: var(--ink-muted);">Condition</dt><dd style="margin: 0;">CPA more than 15% above the campaign's 250 NOK CPA goal (set in Goals); no conversions with 3+ expected: pause</dd>
+              <dt style="color: var(--ink-muted);">Window</dt><dd style="margin: 0;">30 days to 13 Oct; the 7 maturing days left out</dd>
+              <dt style="color: var(--ink-muted);">Guard</dt><dd style="margin: 0;">At least 3 expected conversions</dd>
+              <dt style="color: var(--ink-muted);">Data as of</dt><dd style="margin: 0;">21 Oct 06:04</dd>
+              <dt style="color: var(--ink-muted);">Expires</dt><dd style="margin: 0;">22 Oct 06:12, in 18 h</dd>
+            </dl>
+          </section>
+          <section aria-labelledby="next-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px;">
+            <h2 id="next-h" style="margin: 0 0 10px; font-size: 15px; line-height: 22px; font-weight: 600;">What happens when you apply</h2>
+            <ol style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+              <li>Keel re-reads each keyword and skips any whose bid changed since 06:04.</li>
+              <li>Google checks the changes before they are made.</li>
+              <li>The changes are sent, then read back to confirm.</li>
+              <li>Rules leave these bids alone for 7 days so you can judge the effect.</li>
+              <li>You can undo for 30 days from Recent changes.</li>
+            </ol>
+          </section>
+          <section style="background: var(--surface-sunken); border-radius: var(--radius-lg); padding: 16px 20px; font-size: 13px; color: var(--ink-muted);">
+            Applied changes are listed under Changes, where each one can be undone for 30 days.
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { applied: false, count: 0 };
+  }
+  renderVals() {
+    var self = this;
+    return {
+      yes: true, two: 2,
+      waiting: this.state.applied ? 2 : 3,
+      applied: this.state.applied,
+      appliedCount: this.state.count,
+      apply: function (selected) { self.setState({ applied: true, count: selected ? selected.length : 0 }); },
+      changes: [
+        { entity: 'running shoes women', path: 'Shoes – Search NO › Women · exact', field: 'Max CPC', from: '9,40', to: '8,00', reason: 'CPA 411 NOK vs 250 goal ·118 clicks · 2.7 conv.' },
+        { entity: 'trail running shoes', path: 'Shoes – Search NO › Trail · phrase', field: 'Max CPC', from: '7,10', to: '6,04', reason: 'CPA 325 NOK vs 250 goal ·96 clicks · 2.1 conv.' },
+        { entity: 'shoes sale', path: 'Shoes – Search NO › Sale · broad', field: 'Max CPC', from: '5,50', to: '4,68', reason: 'CPA 296 NOK vs 250 goal ·210 clicks · 3.9 conv.' },
+        { entity: 'cheap sneakers', path: 'Shoes – Search NO › Generic · broad', field: 'Status', from: 'Enabled', to: 'Paused', reason: '1 840 NOK · 438 clicks · 0 conv. where 12.7 were expected' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
